@@ -1,5 +1,7 @@
 # Quantum Casino
 
+[DEMO](http://qhord-test.us-west-2.elasticbeanstalk.com/)
+
 This is a Flask application that is meant to get non-physicists interested in
 and understanding Bell's Theorem in Quantum Mechanics. It is a simple
 implementation of the CHSH game.
