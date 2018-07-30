@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Game{% endblock title %}
+{% block content %}
+<script type=text/javascript>
+    $SCRIPT_URL = "{{ url_for('game.bellgame_submit') }}"
+</script>
+<script type=text/javascript src="{{ url_for('static', filename='bellgame2.js') }}"></script>
+<div class='container'>
+<div class='row'>
+<div class='col'>
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Let's Play Quantum Slots!</legend>
+                    <div class="form-group">
+                        <button type="button" class="btn" id="red">Red</button>
+                        <button type="button" class="btn" id="blue">Blue</button>
+                    </div>
+                    <div class="form-group">
+                        {#{{ form.save(class="btn-primary") }} CURRENTLY BROKEN#}
+                    </div>
+            </fieldset>
+        </form>
+    <h3>Current Hint</h3><span id="hint">{{ hint }}</span>
+    </div>
+</div>
+<div class='col'>
+    <h2>Stats</h2>
+    <h4>Trials</h4><span id="trials">Waiting for results...</span>
+    <h4>Wins</h4><span id="wins">Waiting for results...</span>
+    <h4>Losses</h4><span id="losses">Waiting for results...</span>
+</div>
+<div class='col'>
+    <h2>Last Trial</h2>
+    <h5>Host Hint</h5><span id="host_hint">Waiting for results...</span>
+    <h5>Guest Hint</h5><span id="guest_hint">Waiting for results...</span>
+    <h5>Host Measurement</h5><span id="host_measurement">Waiting for results...</span>
+    <h5>Guest Measurement</h5><span id="guest_measurement">Waiting for results...</span>
+</div>
+</div>
+</div>
+   <div class="border-top pt-3">
+        <small class="text-muted">
+            Need some help? <a class="ml-2" href="{{ url_for('main.about') }}">About</a>
+        </small>
+    </div>
+{% endblock content %}
