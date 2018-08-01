@@ -172,8 +172,6 @@ class Game():
             self.token = token
         self.trial = Trial(token=token)
         self.mode=mode
-        if self.mode == 'TwoPlayerHost':
-            self.
 
     def valid_ate_players_single_player(self):
         assert self.host.player_type == 'human'
