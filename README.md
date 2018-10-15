@@ -2,16 +2,11 @@
 
 [DEMO](https://bellga.me)
 
-## Note:
-The live Demo is several commits ahead of this repo. I am still working to remove all of the sensitive, deployment specific data from that version, at which point I will open a PR here to update the public repo.
-
 This is a Flask application that is meant to get non-physicists interested in
 and understanding Bell's Theorem in Quantum Mechanics. It is a simple
 implementation of the CHSH game.
 
-*Note*: This is a copy of the primary repo which is kept private. I am
-currently working on purging that repo of any sensitive info (passwords, etc)
-that I may have slopily hard-coded.
+*Note*: This is a copy of the primary repo which is kept private. The live Demo is several commits ahead of this repo. I am still working to remove all of the sensitive, deployment specific data from that version, at which point I will open a PR here to update the public repo.
 
 ## Features
 
