@@ -64,12 +64,7 @@ aren't familiar with Flask, a few quick notes:
    that actually contain the game logic.
 
 ## Contributing
-Right now, this is a private repo, there is the potential for some sensitive
-information (passwords and the like) still wrapped up in the version control. I
-haven't yet gone through with a fine-toothed comb. Please be wary of that, and
-do let me know if you notice something egregiously out-of-place.
-
-That being said, I GLADLY welcome any and all contributions, from
+I GLADLY welcome any and all contributions, from
 documentation, to feature implementation, testing/debugging, to
 packaging/code-cleanup, etc. My goal is to get this as a public repo by the
 middle of August.
