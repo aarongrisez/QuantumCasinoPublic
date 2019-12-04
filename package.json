@@ -1,0 +1,23 @@
+{
+  "name": "bellgame-server",
+  "version": "1.0.0",
+  "description": "A multiplayer server for hosting the bellgame",
+  "main": "srv/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aarongrisez/bellga.me2.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/aarongrisez/bellga.me2/issues"
+  },
+  "homepage": "https://github.com/aarongrisez/bellga.me2#readme",
+  "dependencies": {
+    "boardgame.io": "^0.35.1",
+    "esm": "^3.2.25"
+  }
+}

@@ -1,0 +1,14 @@
+version: '3'
+services:
+
+  node:
+    build: .
+    volumes:
+      - ./:/home/node/app
+    user: node
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    expose:
+      - "8081"
+    command: "npm start"
