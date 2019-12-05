@@ -18,6 +18,7 @@
   "homepage": "https://github.com/aarongrisez/bellga.me2#readme",
   "dependencies": {
     "boardgame.io": "^0.35.1",
-    "esm": "^3.2.25"
+    "esm": "^3.2.25",
+    "mongodb": "^3.3.5"
   }
 }
