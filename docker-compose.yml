@@ -3,19 +3,33 @@ services:
 
   srv:
     build:
-      context: .
-      dockerfile: srv/Dockerfile
+      context: ./srv
     volumes:
-      - ./:/home/node/app
+      - ./srv/src:/home/node/app/src
     user: node
-    working_dir: /home/node/app
+    working_dir: /home/node/app/src
     environment:
       - NODE_ENV=development
     ports:
       - 8000:8000
-    command: "npm run server"
+    command: "npm start"
     depends_on: 
       - mongo
+  
+  app:
+    build:
+      context: app/
+    volumes:
+      - ./app/src:/home/node/app/src
+    working_dir: /home/node/app/src
+    environment:
+      - NODE_ENV=development
+    ports:
+      - 80:3000
+    command: "npm start"
+    depends_on: 
+      - mongo
+
   
   mongo:
     image: mongo
