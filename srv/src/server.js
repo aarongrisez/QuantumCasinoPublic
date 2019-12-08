@@ -1,5 +1,5 @@
 const { Server, Mongo } = require('boardgame.io/server');
-const BellgameVanilla = require('./game').BellgameVanilla;
+const { BellgameVanilla } = require('../bellgame/game');
 
 const server = Server({
   games: [BellgameVanilla],
