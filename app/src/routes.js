@@ -7,7 +7,7 @@
  */
 
 import lobby from './lobby';
-import simulator from './simulator'
+import simulator from '../bellgame/simulator'
 
 const routes = [
   {
