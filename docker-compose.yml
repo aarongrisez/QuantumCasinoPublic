@@ -19,7 +19,7 @@ services:
   
   app:
     build:
-      context: app/
+      context: ./app
     volumes:
       - ./app/src:/home/node/app/src
       - ./bellgame:/home/node/app/bellgame
