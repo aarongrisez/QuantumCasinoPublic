@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { Lobby } from 'boardgame.io/react';
-import './lobby.css';
+import './lobbies.css';
 
 const hostname = window.location.hostname;
 const importedGames = [];

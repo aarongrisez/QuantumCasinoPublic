@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/MIT.
  */
 
-import lobby from './lobby';
+import lobbies from './lobbies';
 import simulator from '../bellgame/simulator'
 
 const routes = [
@@ -15,8 +15,8 @@ const routes = [
     routes: simulator.routes,
   },
   {
-    name: 'Lobby',
-    routes: lobby.routes,
+    name: 'Lobbies',
+    routes: lobbies.routes,
   },
 ];
 
