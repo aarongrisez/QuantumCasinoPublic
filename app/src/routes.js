@@ -6,13 +6,13 @@
  * https://opensource.org/licenses/MIT.
  */
 
-import lobbies from './lobbies';
-import simulator from '../bellgame/simulator'
+import lobbies from './components/lobbies';
+import profile from './components/profile';
 
 const routes = [
   {
-    name: 'Simulator',
-    routes: simulator.routes,
+    name: 'Profile',
+    routes: profile.routes,
   },
   {
     name: 'Lobbies',

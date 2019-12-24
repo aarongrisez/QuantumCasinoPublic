@@ -9,7 +9,7 @@
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import _ from 'lodash';
-import LiNavLink from './li-navlink';
+import LiNavLink from './utils/li-navlink';
 
 import routes from './routes';
 import './app.css';
