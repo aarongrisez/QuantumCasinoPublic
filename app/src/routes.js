@@ -11,13 +11,18 @@ import profile from './components/profile';
 
 const routes = [
   {
-    name: 'Profile',
-    routes: profile.routes,
-  },
-  {
     name: 'Lobbies',
     routes: lobbies.routes,
   },
 ];
+
+export const privateRoutes = [
+  {
+    name: 'Profile',
+    routes: profile.routes,
+  },
+];
+
+
 
 export default routes;

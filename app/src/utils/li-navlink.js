@@ -10,6 +10,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, Route } from 'react-router-dom';
 
+export const getLiNavLinks = (route_category, idx) => {
+  return (
+      <li key={idx}>
+        <p>{route_category.name}</p>
+        <ul>
+          {route_category.routes.map((route, _idx) => (
+            <LiNavLink
+              key={`${idx}.${_idx}`}
+              to={route.path}
+              exact={true}
+              activeClassName="active"
+            >
+              {route.text}
+            </LiNavLink>
+          ))}
+        </ul>
+      </li>
+  )
+}
+
 const LiNavLink = props => {
   const {
     to,

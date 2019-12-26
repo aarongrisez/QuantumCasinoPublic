@@ -8,9 +8,32 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import PrivateRoute from './private-route';
 
-const LiNavLink = props => {
+export const getPrivateLiNavLinks = (route_category, idx) => {
+  return (
+      <li key={idx}>
+        <p>{route_category.name}</p>
+        <ul>
+          {route_category.routes.map((route, _idx) => (
+            <PrivateLiNavLink
+              key={`${idx}.${_idx}`}
+              to={route.path}
+              exact={true}
+              activeClassName="active"
+            >
+              {route.text}
+            </PrivateLiNavLink>
+          ))}
+        </ul>
+      </li>
+  )
+}
+
+
+
+const PrivateLiNavLink = props => {
   const {
     to,
     exact,
@@ -23,7 +46,7 @@ const LiNavLink = props => {
     ...rest
   } = props;
   return (
-    <Route
+    <PrivateRoute
       path={typeof to === 'object' ? to.pathname : to}
       exact={exact}
       strict={strict}
@@ -41,11 +64,11 @@ const LiNavLink = props => {
           </li>
         );
       }}
-    </Route>
+    </PrivateRoute>
   );
 };
 
-LiNavLink.propTypes = {
+PrivateLiNavLink.propTypes = {
   to: PropTypes.string,
   exact: PropTypes.bool,
   strict: PropTypes.bool,
@@ -56,4 +79,4 @@ LiNavLink.propTypes = {
   isActive: PropTypes.func,
 };
 
-export default LiNavLink;
+export default PrivateLiNavLink;

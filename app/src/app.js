@@ -9,9 +9,10 @@
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import _ from 'lodash';
-import LiNavLink from './utils/li-navlink';
+import { getLiNavLinks } from './utils/li-navlink';
+import { getPrivateLiNavLinks } from './utils/private-li-navlink';
 
-import routes from './routes';
+import routes, { privateRoutes } from './routes';
 import './app.css';
 
 // CSS for the sidebar is taken from vue.css
@@ -21,23 +22,10 @@ export const App = () => (
       <aside className="sidebar">
         <div className="sidebar-nav" style={{ height: '90%' }}>
           <ul>
-            {routes.map((route_category, idx) => (
-              <li key={idx}>
-                <p>{route_category.name}</p>
-                <ul>
-                  {route_category.routes.map((route, _idx) => (
-                    <LiNavLink
-                      key={`${idx}.${_idx}`}
-                      to={route.path}
-                      exact={true}
-                      activeClassName="active"
-                    >
-                      {route.text}
-                    </LiNavLink>
-                  ))}
-                </ul>
-              </li>
-            ))}
+            { routes.map((route_category, idx) => getLiNavLinks(route_category, idx)) }
+          </ul>
+          <ul>
+            { privateRoutes.map((route_category, idx) => getPrivateLiNavLinks(route_category, idx)) }
           </ul>
         </div>
       </aside>
