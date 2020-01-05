@@ -8,10 +8,10 @@
 
 import React from 'react';
 import { Lobby } from 'boardgame.io/react';
-import './lobbies.css';
+import { BellgameVanilla } from "../components/Games/BellgameVanilla";
 
 const hostname = window.location.hostname;
-const importedGames = [];
+const importedGames = [{ game: BellgameVanilla, board: null }];
 
 const LobbyView = () => {
 
@@ -25,8 +25,6 @@ const LobbyView = () => {
 
 const getDefaultLobbyView = () => (
   <div style={{ padding: 50 }}>
-    <h1>Lobby hi</h1>
-
     <Lobby
       gameServer={`http://${hostname}:8000`}
       lobbyServer={`http://${hostname}:8000`}

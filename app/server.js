@@ -1,17 +1,16 @@
-/*
- * Copyright 2017 The boardgame.io Authors
- *
- * Use of this source code is governed by a MIT-style
- * license that can be found in the LICENSE file or at
- * https://opensource.org/licenses/MIT.
- */
+/* eslint-disable no-console */
+const express = require("express");
+const { join } = require("path");
+const morgan = require("morgan");
+const app = express();
 
-import { Server } from 'boardgame.io/server';
-import TicTacToe from './src/tic-tac-toe/game';
-import Chess from './src/chess/game';
+const port = process.env.SERVER_PORT || 3000;
 
-const PORT = process.env.PORT || 8000;
-const server = Server({ games: [TicTacToe, Chess] });
-server.run(PORT, () => {
-  console.log(`Serving at: http://localhost:${PORT}/`);
+app.use(morgan("dev"));
+app.use(express.static(join(__dirname, "build")));
+
+app.use((_, res) => {
+  res.sendFile(join(__dirname, "build", "index.html"));
 });
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

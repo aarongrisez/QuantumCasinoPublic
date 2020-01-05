@@ -1,38 +1,51 @@
+
 {
-  "name": "react-web",
+  "name": "auth0-react-01-login",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "parcel src/index.html --port 3000 --open",
-    "build": "parcel build src/index.html"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "devDependencies": {
-    "parcel-bundler": "^1.11.0"
-  },
-  "browserslist": [
-    "last 1 Chrome versions"
-  ],
   "dependencies": {
-    "@auth0/auth0-spa-js": "^1.6.0",
-    "@babel/core": "^7.6.2",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/preset-env": "^7.6.2",
-    "@babel/preset-react": "^7.0.0",
-    "boardgame.io": "^0.35.1",
-    "chess.js": "^0.10.2",
-    "parcel-plugin-svelte": "^4.0.4",
-    "react": "^16.12.0",
-    "react-dom": "^16.9.0",
-    "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2",
-    "superagent": "^5.1.2",
-    "svelte": "^3.0.0",
-    "three": "^0.109.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
-    ]
+      "@auth0/auth0-spa-js": "^1.6.0",
+      "@babel/core": "^7.6.2",
+      "@babel/plugin-proposal-class-properties": "^7.5.5",
+      "@babel/preset-env": "^7.6.2",
+      "@babel/preset-react": "^7.0.0",
+      "@fortawesome/fontawesome-svg-core": "^1.2.17",
+      "@fortawesome/free-solid-svg-icons": "^5.8.1",
+      "@fortawesome/react-fontawesome": "^0.1.4",
+      "boardgame.io": "^0.35.1",
+      "react": "^16.12.0",
+      "react-dom": "^16.9.0",
+      "react-router": "^5.1.2",
+      "react-router-dom": "^5.1.2",
+      "react-scripts": "3.0.1",
+      "reactstrap": "^8.0.0",
+      "superagent": "^5.1.2",
+      "svelte": "^3.0.0",
+      "express": "^4.16.4",
+      "highlight.js": "^9.15.6",
+      "morgan": "^1.9.1"
+    },
+    "devDependencies": {},
+    "eslintConfig": {
+      "extends": "react-app"
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    }
   }
-}
+  
