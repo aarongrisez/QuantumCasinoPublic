@@ -8,10 +8,13 @@
 
 import React from 'react';
 import { Lobby } from 'boardgame.io/react';
-import { BellgameVanilla } from "../components/Games/BellgameVanilla";
+import { TicTacToe } from "../components/Games/TicTacToe"
+import { TicTacToeBoard } from "../components/Boards/TicTacToeBoard"
 
 const hostname = window.location.hostname;
-const importedGames = [{ game: BellgameVanilla, board: null }];
+const importedGames = [
+  { game: TicTacToe, board: TicTacToeBoard },
+];
 
 const LobbyView = () => {
 

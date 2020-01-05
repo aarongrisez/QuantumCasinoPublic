@@ -1,8 +1,8 @@
 const { Server, Mongo } = require('boardgame.io/server');
-const { BellgameVanilla } = require('../bellgame/game');
+const { TicTacToe } = require('./Games/TicTacToe')
 
 const server = Server({
-  games: [BellgameVanilla],
+  games: [TicTacToe],
   db: new Mongo({
     url: 'mongodb://root:pass@mongo:27017',
     dbname: 'games'
