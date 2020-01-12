@@ -1,0 +1,63 @@
+version: '3'
+services:
+
+  srv:
+    build:
+      context: ./srv
+    volumes:
+      - ./srv/src:/home/node/app/src
+      - ./bellgame:/home/node/app/bellgame
+    user: node
+    working_dir: /home/node/app/src
+    ports:
+      - 8000:8000
+    environment:
+      - NODE_ENV=development
+    command: "npm start"
+    depends_on: 
+      - mongo
+  
+  app:
+    build:
+      context: ./app
+    volumes:
+      - ./app/src:/app/src
+      - ./app/public:/app/public
+      - ./bellgame:/app/bellgame
+    working_dir: /app/src
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+    command: "npm start"
+    depends_on: 
+      - mongo
+  
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pass
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: pass
+
+  traefik:
+    image: "traefik:v2.0.0-rc3"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
