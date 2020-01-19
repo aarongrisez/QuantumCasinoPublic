@@ -7,11 +7,11 @@ RUN mkdir /app
 
 WORKDIR /app
 
-COPY package.json .
+COPY ./app/package.json .
 
 RUN yarn install
 
-COPY . .
+COPY ./app .
 
 RUN yarn build
 
