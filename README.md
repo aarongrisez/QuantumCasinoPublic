@@ -1,7 +1,6 @@
 # bellga.me
 ## 2.0
 
-<<<<<<< HEAD
 ### Contributing
 1. Fork the repo
 2. Branch from the latest release using the convention "feature/{feature description}"
@@ -28,7 +27,3 @@ to run the server.
 ### API Testing
 
 I am personally a fan of Postman for API testing, so I've included an export of my saved requests that I use for testing in the `test` directory.
-=======
-Coming soon...and probably moving to gitlab:
-https://gitlab.com/aarongrisez/bellgame2
->>>>>>> 3da5b598965c2c794a2232663d0f3b4a9c1160a7
