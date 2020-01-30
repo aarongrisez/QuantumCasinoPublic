@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
 
   srv:
@@ -8,28 +8,24 @@ services:
     environment:
       - NODE_ENV=production
     command: "npm start"
-    depends_on: 
-      - mongo
-  
+    networks:
+      - proxy-net
+    labels:
+      - "traefik.http.routers.srv.rule=Host(`suppadesktop.local`) && PathPrefix(`/srv`)"
+      - "traefik.http.middlewares.srv-stripprefix.stripprefix.prefixes=/srv"
+      - "traefik.http.middlewares.srv-stripprefix.stripprefix.forceslash=false"
+      - "traefik.http.routers.srv.entrypoints=web"
+      - "traefik.http.routers.srv.middlewares=srv-stripprefix"
+
   app:
     image: registry.gitlab.com/aarongrisez/bellgame2/app:latest
-    working_dir: /app/src
-    environment:
-      - NODE_ENV=production
-    command: "npm start"
-    depends_on: 
-      - mongo
-
-  traefik:
-    image: "traefik:v2.0.0-rc3"
-    container_name: "traefik"
-    command:
-      - "--log.level=INFO"
-      - "--api.insecure=false"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    working_dir: /app
+    networks:
+      - proxy-net
+    labels:
+      - "traefik.http.routers.client.rule=Host(`suppadesktop.local`)"
+      - "traefik.http.routers.client.entrypoints=web"
+  
+networks:
+  proxy-net:
+    external: true

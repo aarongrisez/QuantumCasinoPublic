@@ -1,8 +1,8 @@
 FROM node:latest
-COPY ./srv/package.json /home/node/app/package.json
-COPY ./srv/package-lock.json /home/node/app/package-lock.json
-WORKDIR /home/node/app
+COPY ./srv/package.json /app/package.json
+COPY ./srv/package-lock.json /app/package-lock.json
+WORKDIR /app
 RUN npm install
-COPY ./srv/src /home/node/app/src
+COPY ./srv/src /app/src
 EXPOSE 8000
 CMD ["npm", "start"]

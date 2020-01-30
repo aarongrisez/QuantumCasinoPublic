@@ -1,38 +1,19 @@
-FROM node:10-alpine as build
+FROM node:10-alpine as deps
 
 RUN apk update && apk upgrade && \
   apk add --no-cache bash git openssh yarn
 
-RUN mkdir /app
-
-WORKDIR /app
-
+WORKDIR /usr/src/app
 COPY ./app/package.json .
-
+COPY ./app/yarn.lock .
 RUN yarn install
-
 COPY ./app .
-
 RUN yarn build
 
 # ---------------
 
-FROM node:10-alpine
-
+FROM nginx:1.12-alpine as build
 RUN mkdir -p /app/build
-
-RUN apk update && apk upgrade && apk add yarn git
-
-WORKDIR /app
-
-COPY --from=build /app/build ./build
-COPY --from=build /app/package.json .
-COPY --from=build /app/server.js .
-
-ENV NODE_ENV production
-
-RUN yarn install --production
-
-EXPOSE 3000
-
-CMD ["node", "server.js"]
+COPY --from=deps /usr/src/app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
