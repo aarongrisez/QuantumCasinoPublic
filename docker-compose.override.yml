@@ -8,8 +8,6 @@ services:
     volumes:
       - ./srv/src:/app/src
     working_dir: /app
-    ports:
-      - 8000:8000
     environment:
       - NODE_ENV=development
     secrets:
@@ -17,11 +15,11 @@ services:
   
   app:
     build:
-      dockerfile: ./app/Dockerfile
+      dockerfile: ./app/dev.Dockerfile
       context: .
     volumes:
-      - ./app/src:/app/src
-      - ./app/public:/app/public
+      - ./app/src:/usr/src/app/src
+      - ./app/public:/usr/src/app/public
     environment:
       - NODE_ENV=development
       - SKIP_PREFLIGHT_CHECK=true

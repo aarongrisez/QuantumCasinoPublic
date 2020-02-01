@@ -2,29 +2,27 @@ version: '3.7'
 services:
 
   srv:
-    image: registry.gitlab.com/aarongrisez/bellgame2/srv:latest
+    image: aarongrisez/bellgame2-srv:latest
     user: node
-    working_dir: /home/node/app/src
     environment:
       - NODE_ENV=production
     command: "npm start"
     networks:
       - proxy-net
     labels:
-      - "traefik.http.routers.srv.rule=Host(`suppadesktop.local`) && PathPrefix(`/srv`)"
+      - "traefik.http.routers.srv.rule=Host(`localhost`) && PathPrefix(`/srv`)"
       - "traefik.http.middlewares.srv-stripprefix.stripprefix.prefixes=/srv"
       - "traefik.http.middlewares.srv-stripprefix.stripprefix.forceslash=false"
       - "traefik.http.routers.srv.entrypoints=web"
       - "traefik.http.routers.srv.middlewares=srv-stripprefix"
 
   app:
-    image: registry.gitlab.com/aarongrisez/bellgame2/app:latest
-    working_dir: /app
+    image: aarongrisez/bellgame2-app:latest
     networks:
       - proxy-net
     labels:
-      - "traefik.http.routers.client.rule=Host(`suppadesktop.local`)"
-      - "traefik.http.routers.client.entrypoints=web"
+      - "traefik.http.routers.app.entrypoints=web"
+      - "traefik.http.routers.app.rule=Host(`localhost`)"
   
 networks:
   proxy-net:

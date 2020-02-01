@@ -12,7 +12,7 @@ RUN yarn build
 
 # ---------------
 
-FROM nginx:1.12-alpine as build
+FROM nginx:1.12-alpine
 RUN mkdir -p /app/build
 COPY --from=deps /usr/src/app/build /usr/share/nginx/html
 EXPOSE 80
