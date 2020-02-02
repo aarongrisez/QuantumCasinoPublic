@@ -1,56 +1,48 @@
-/*
- * Copyright 2017 The boardgame.io Authors.
- *
- * Use of this source code is governed by a MIT-style
- * license that can be found in the LICENSE file or at
- * https://opensource.org/licenses/MIT.
- */
+import React from "react";
+import { Router, Route, Switch } from "react-router-dom";
+import { Container } from "reactstrap";
 
-import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
-import _ from 'lodash';
-import LiNavLink from './li-navlink';
+import PrivateRoute from "./components/PrivateRoute";
+import Loading from "./components/Loading";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import Home from "./views/Home";
+import Profile from "./views/Profile";
+import LobbyView from "./views/LobbyView";
+import { useAuth0 } from "./react-auth0-spa";
+import history from "./utils/history";
 
-import routes from './routes';
-import './app.css';
+// styles
+import "./app.css";
 
-// CSS for the sidebar is taken from vue.css
-export const App = () => (
-  <Router>
-    <main>
-      <aside className="sidebar">
-        <div className="sidebar-nav" style={{ height: '90%' }}>
-          <ul>
-            {routes.map((route_category, idx) => (
-              <li key={idx}>
-                <p>{route_category.name}</p>
-                <ul>
-                  {route_category.routes.map((route, _idx) => (
-                    <LiNavLink
-                      key={`${idx}.${_idx}`}
-                      to={route.path}
-                      exact={true}
-                      activeClassName="active"
-                    >
-                      {route.text}
-                    </LiNavLink>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </aside>
-      <section className="content">
-        {_.flattenDeep(routes.map(route => route.routes)).map((route, idx) => (
-          <Route
-            key={idx}
-            exact
-            path={route.path}
-            component={route.component}
-          />
-        ))}
-      </section>
-    </main>
-  </Router>
-);
+// fontawesome
+import initFontAwesome from "./utils/initFontAwesome";
+import ErrorView from "./views/ErrorView";
+initFontAwesome();
+
+const App = () => {
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  return (
+    <Router history={history}>
+      <div id="app" className="d-flex flex-column h-100">
+        <NavBar />
+        <Container className="flex-grow-1 mt-5">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <PrivateRoute path="/lobby" component={LobbyView} />
+            <PrivateRoute path="/profile" component={Profile} />
+            <Route path="*" exact component={ErrorView} />
+          </Switch>
+        </Container>
+        <Footer />
+      </div>
+    </Router>
+  );
+};
+
+export default App;

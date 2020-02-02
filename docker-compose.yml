@@ -1,50 +1,29 @@
-version: '3'
+version: '3.7'
 services:
 
   srv:
-    build:
-      context: ./srv
-    volumes:
-      - ./srv/src:/home/node/app/src
-      - ./bellgame:/home/node/app/bellgame
+    image: aarongrisez/bellgame2-srv:latest
     user: node
-    working_dir: /home/node/app/src
     environment:
-      - NODE_ENV=development
-    ports:
-      - 8000:8000
+      - NODE_ENV=production
     command: "npm start"
-    depends_on: 
-      - mongo
-  
+    networks:
+      - proxy-net
+    labels:
+      - "traefik.http.routers.srv.rule=Host(`localhost`) && PathPrefix(`/srv`)"
+      - "traefik.http.middlewares.srv-stripprefix.stripprefix.prefixes=/srv"
+      - "traefik.http.middlewares.srv-stripprefix.stripprefix.forceslash=false"
+      - "traefik.http.routers.srv.entrypoints=web"
+      - "traefik.http.routers.srv.middlewares=srv-stripprefix"
+
   app:
-    build:
-      context: app/
-    volumes:
-      - ./app/src:/home/node/app/src
-      - ./bellgame:/home/node/app/bellgame
-    working_dir: /home/node/app/src
-    environment:
-      - NODE_ENV=development
-    ports:
-      - 80:3000
-    command: "npm start"
-    depends_on: 
-      - mongo
-
+    image: aarongrisez/bellgame2-app:latest
+    networks:
+      - proxy-net
+    labels:
+      - "traefik.http.routers.app.entrypoints=web"
+      - "traefik.http.routers.app.rule=Host(`localhost`)"
   
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: pass
-
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: pass
+networks:
+  proxy-net:
+    external: true
