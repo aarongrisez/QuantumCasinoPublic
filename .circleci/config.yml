@@ -14,5 +14,5 @@ jobs:
           docker build -t aarongrisez/bellgame2-srv:<< pipeline.git.revision >> .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push aarongrisez/bellgame2-app:<< pipeline.git.revision >>dev 
-          docker push aarongrisez/bellgame2-app:<< pipeline.git.revision >>dev 
+          docker push aarongrisez/bellgame2-app:<< pipeline.git.revision >> 
           docker push aarongrisez/bellgame2-srv:<< pipeline.git.revision >>
