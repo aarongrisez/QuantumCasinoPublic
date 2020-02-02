@@ -8,10 +8,12 @@
 
 import React from 'react';
 import { Lobby } from 'boardgame.io/react';
-import './lobby.css';
+import { TicTacToe } from "../components/Games/TicTacToe"
+import { TicTacToeBoard } from "../components/Boards/TicTacToeBoard"
 
-const hostname = window.location.hostname;
-const importedGames = [];
+const importedGames = [
+  { game: TicTacToe, board: TicTacToeBoard },
+];
 
 const LobbyView = () => {
 
@@ -25,11 +27,9 @@ const LobbyView = () => {
 
 const getDefaultLobbyView = () => (
   <div style={{ padding: 50 }}>
-    <h1>Lobby hi</h1>
-
     <Lobby
-      gameServer={`http://${hostname}:8000`}
-      lobbyServer={`http://${hostname}:8000`}
+      gameServer={process.env.REACT_APP_GAME_SERVER}
+      lobbyServer={process.env.REACT_APP_LOBBY_SERVER}
       gameComponents={importedGames}
     />
   </div>
