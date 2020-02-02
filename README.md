@@ -1,29 +1,20 @@
-# bellga.me
-## 2.0
+# bellga.me2
+[![CircleCI](https://circleci.com/gh/aarongrisez/bellga.me2/tree/release-v1.0.0.svg?style=svg)](https://circleci.com/gh/aarongrisez/bellga.me2/tree/release-v1.0.0)
 
-### Contributing
-1. Fork the repo
-2. Branch from the latest release using the convention "feature/{feature description}"
-3. Do the coding stuff
-4. Make a PR to the most recent release branch
+## Application Structure
+### Client
+The client is a React application bootstrapped with CRA and served by NGINX. Authentication is handled by Auth0.
 
-### Server Quickstart
+### Server
+The server is a Koa application (NodeJS) using a MongoDB backend for storing game and lobby states.
 
-The easiest way to get running is to use the docker-compose file in the root of this repo. Assuming you have docker-compose (min API version 3 required) installed, run
+### Framework
+We use boardgame.io as our game framework for handling game logic and state.
 
-```bash
-docker-compose build
-```
+## Docker Images
+ - [Client](https://hub.docker.com/repository/docker/aarongrisez/bellgame2-app)
+ - [Server](https://hub.docker.com/repository/docker/aarongrisez/bellgame2-srv)
 
-to create the server image for the first time. You can then run
-
-```bash
-docker-compose up
-```
-
-to run the server.
-
-
-### API Testing
-
-I am personally a fan of Postman for API testing, so I've included an export of my saved requests that I use for testing in the `test` directory.
+## Resources
+ - [Bell's Theorem](https://en.wikipedia.org/wiki/Bell%27s_theorem)
+ - [What's this all about?](about.md)
