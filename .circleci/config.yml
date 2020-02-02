@@ -9,5 +9,10 @@ jobs:
       - run: |
           cd app
           docker build -t aarongrisez/bellgame2-app:<< pipeline.git.revision >>dev --file dev.Dockerfile .
+          docker build -t aarongrisez/bellgame2-app:<< pipeline.git.revision >> --file prod.Dockerfile .
+          cd ../srv
+          docker build -t aarongrisez/bellgame2-srv:<< pipeline.git.revision >> .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push aarongrisez/bellgame2-app:<< pipeline.git.revision >>dev 
+          docker push aarongrisez/bellgame2-app:<< pipeline.git.revision >>dev 
+          docker push aarongrisez/bellgame2-srv:<< pipeline.git.revision >>
