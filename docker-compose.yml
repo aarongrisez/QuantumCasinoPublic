@@ -2,7 +2,7 @@ version: '3.7'
 services:
 
   srv:
-    image: aarongrisez/bellgame2-srv:latest
+    image: aarongrisez/bellgame2-srv:release-v1.0.0
     user: node
     environment:
       - NODE_ENV=production
@@ -17,7 +17,7 @@ services:
       - "traefik.http.routers.srv.middlewares=srv-stripprefix"
 
   app:
-    image: aarongrisez/bellgame2-app:latest
+    image: aarongrisez/bellgame2-app:release-v1.0.0
     networks:
       - proxy-net
     labels:
