@@ -2,9 +2,6 @@ version: '3.7'
 services:
 
   srv:
-    build:
-      dockerfile: ./srv/Dockerfile
-      context: ./srv
     volumes:
       - ./srv/src:/app/src
     working_dir: /app
@@ -14,9 +11,7 @@ services:
       - DB_CONNECTION_URI
   
   app:
-    build:
-      dockerfile: ./app/dev.Dockerfile
-      context: ./app
+    image: aarongrisez/bellgame2-app:release-v1.0.0dev
     volumes:
       - ./app/src:/usr/src/app/src
       - ./app/public:/usr/src/app/public
@@ -25,8 +20,8 @@ services:
       - SKIP_PREFLIGHT_CHECK=true
       - REACT_APP_AUTH0_DOMAIN=dev-k1aifjsj.auth0.com
       - REACT_APP_AUTH0_CLIENT_ID=7fLB8KTeluEZVjRA9s0BhOBzmDl38ImE
-      - REACT_APP_GAME_SERVER=http://localhost:8000/srv
-      - REACT_APP_LOBBY_SERVER=http://localhost:8000/srv
+      - REACT_APP_GAME_SERVER=
+      - REACT_APP_LOBBY_SERVER=
   
 secrets:
   DB_CONNECTION_URI:
