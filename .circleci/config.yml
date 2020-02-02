@@ -1,14 +1,28 @@
 version: 2.1
 jobs:
   build:
+    machine:
+      image: ubuntu-1604:201903-01
     working_directory: ~/project
-    docker:
-      - image: circleci/node:10.16.3
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-          TAG=1.0.$CIRCLE_BUILD_NUM
-          docker build -t aarongrisez/bellgame2-app:<<pipeline.git.revision>>
-          echo $DOCKER_PASS | docker login -u $DOCKER_USER --pasword-stdin
+      - run: |
+          cd app
+          docker build -t aarongrisez/bellgame2-app:<< pipeline.git.branch >>dev --file dev.Dockerfile .
+          docker build -t aarongrisez/bellgame2-app:<< pipeline.git.branch >> --file prod.Dockerfile .
+          cd ../srv
+          docker build -t aarongrisez/bellgame2-srv:<< pipeline.git.branch >> .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push aarongrisez/bellgame2-app:<< pipeline.git.branch >>dev 
+          docker push aarongrisez/bellgame2-app:<< pipeline.git.branch >> 
+          docker push aarongrisez/bellgame2-srv:<< pipeline.git.branch >>
+
+workflows:
+  release:
+    jobs:
+      - build:
+          filters:
+            branches:
+              # Only semantically versioned release branches
+              # See semantic versioning: https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+              only: /^release-v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
