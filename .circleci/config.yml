@@ -8,6 +8,6 @@ jobs:
       - checkout
       - run: |
           cd app
-          docker build -t aarongrisez/bellgame2-app:<< pipeline.git.revision >>dev --dockerfile dev.Dockerfile .
+          docker build -t aarongrisez/bellgame2-app:<< pipeline.git.revision >>dev --file dev.Dockerfile .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push aarongrisez/bellgame2-app:<< pipeline.git.revision >>dev 
