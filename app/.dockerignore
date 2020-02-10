@@ -1,6 +1,9 @@
 .cache/*
-node_modules/
-build/
+.git
+*Dockerfile*
+*docker-compose*
+node_modules
+build/*
 exec.*
 npm-debug.log*
 yarn-error.log

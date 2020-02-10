@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { NavLink as RouterNavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from 'react';
+import { NavLink as RouterNavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {
   Collapse,
@@ -16,9 +16,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-} from "reactstrap";
+} from 'reactstrap';
 
-import { useAuth0 } from "../react-auth0-spa";
+import { useAuth0 } from '../react-auth0-spa';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +34,6 @@ const NavBar = () => {
     <div className="nav-container">
       <Navbar color="light" light expand="md">
         <Container>
-          <NavbarBrand className="logo" />
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
@@ -49,14 +48,15 @@ const NavBar = () => {
                 </NavLink>
               </NavItem>
               <NavItem>
-                {isAuthenticated && (<NavLink
-                  tag={RouterNavLink}
-                  to="/lobby"
-                  exact
-                  activeClassName="router-link-exact-active"
-                >
-                  Lobby
-                </NavLink>
+                {isAuthenticated && (
+                  <NavLink
+                    tag={RouterNavLink}
+                    to="/lobby"
+                    exact
+                    activeClassName="router-link-exact-active"
+                  >
+                    Lobby
+                  </NavLink>
                 )}
               </NavItem>
             </Nav>
