@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import CreateRoomForm from './CreateRoomForm';
 import { getFormValues } from 'redux-form';
 import { createRoom } from '../../state/actions/lobby';
+import RoomListContainer from './RoomListContainer';
 //import { TicTacToe } from '../Games/TicTacToe';
 //import { TicTacToeBoard } from '../Boards/TicTacToeBoard';
 
@@ -18,13 +19,22 @@ import { createRoom } from '../../state/actions/lobby';
 
 let LobbyView = ({ dispatch }) => {
   return (
-    <div style={{ padding: 50 }}>
+    <div>
       <h1>Lobby</h1>
-      <CreateRoomForm
-        onSubmit={values =>
-          dispatch(createRoom(values.roomName, values.game, values.numPlayers))
-        }
-      />
+      <div style={{ padding: 10 }}>
+        <h2>Make a New Room</h2>
+        <CreateRoomForm
+          onSubmit={values =>
+            dispatch(
+              createRoom(values.roomName, values.game, values.numPlayers)
+            )
+          }
+        />
+      </div>
+      <div style={{ padding: 10 }}>
+        <h2>Join an existing room</h2>
+        <RoomListContainer />
+      </div>
     </div>
   );
 };
