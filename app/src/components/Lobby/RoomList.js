@@ -1,30 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Jumbotron } from 'reactstrap';
+import { Table, Spinner } from 'reactstrap';
+import Loading from '../Loading';
 import Room from './Room';
 
 const RoomList = ({ rooms }) => {
-  if (rooms) {
-    return (
-      <Table>
-        <thead>
-          <tr>
-            <th>Room Name</th>
-            <th>Game</th>
-            <th># Players</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rooms.map((room, index) => (
-            <Room key={index} {...room} />
-          ))}
-        </tbody>
-      </Table>
-    );
-  } else {
-    return <h1>No Rooms</h1>;
+  const [fetching, setFetching] = useState(true);
+
+  if (fetching) {
+    setTimeout(() => setFetching(false), 1500);
+    return <Spinner color="primary" />;
   }
+
+  return (
+    <Table>
+      <thead>
+        <tr>
+          <th>Room Name</th>
+          <th>Game</th>
+          <th># Players</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rooms.map((room, index) => (
+          <Room key={index} {...room} />
+        ))}
+      </tbody>
+    </Table>
+  );
 };
 
 RoomList.propTypes = {
