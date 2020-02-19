@@ -10,7 +10,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CreateRoomForm from './CreateRoomForm';
 import { getFormValues } from 'redux-form';
-import { createRoom } from '../../state/actions/lobby';
+import { createRoom, loadRooms } from '../../state/actions/lobby';
 import RoomListContainer from './RoomListContainer';
 //import { TicTacToe } from '../Games/TicTacToe';
 //import { TicTacToeBoard } from '../Boards/TicTacToeBoard';
@@ -18,6 +18,8 @@ import RoomListContainer from './RoomListContainer';
 //const importedGames = [{ game: TicTacToe, board: TicTacToeBoard }];
 
 let LobbyView = ({ dispatch }) => {
+  dispatch(loadRooms('tic-tac-toe'));
+
   return (
     <div>
       <h1>Lobby</h1>

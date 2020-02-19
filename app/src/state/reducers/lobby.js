@@ -1,4 +1,5 @@
-import { CREATE_ROOM } from '../actions/lobby';
+import { CREATE_ROOM, RENDER_ROOMS } from '../actions/lobby';
+import fetchBackend from '../../utilities/backend';
 
 const initialState = {
   rooms: []
@@ -16,6 +17,11 @@ export function lobbyReducer(state = initialState, action) {
       return {
         ...state,
         rooms: newRooms
+      };
+    case RENDER_ROOMS:
+      return {
+        ...state,
+        rooms: action.rooms
       };
     default:
       return state;
