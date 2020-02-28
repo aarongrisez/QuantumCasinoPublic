@@ -1,23 +1,23 @@
-import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
-import { Container } from "reactstrap";
+import React from 'react';
+import { Router, Route, Switch } from 'react-router-dom';
+import { Container } from 'reactstrap';
 
-import PrivateRoute from "./components/PrivateRoute";
-import Loading from "./components/Loading";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
-import Home from "./views/Home";
-import Profile from "./views/Profile";
-import LobbyView from "./views/LobbyView";
-import { useAuth0 } from "./react-auth0-spa";
-import history from "./utils/history";
+import PrivateRoute from './components/PrivateRoute';
+import Loading from './components/Loading';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
+import Home from './components/Home';
+import Profile from './components/Profile';
+import LobbyView from './components/Lobby/LobbyView';
+import { useAuth0 } from './react-auth0-spa';
+import history from './utilities/history';
 
 // styles
-import "./app.css";
+import './app.css';
 
 // fontawesome
-import initFontAwesome from "./utils/initFontAwesome";
-import ErrorView from "./views/ErrorView";
+import initFontAwesome from './utilities/initFontAwesome';
+import ErrorView from './components/ErrorView';
 initFontAwesome();
 
 const App = () => {

@@ -1,10 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./app";
-import * as serviceWorker from "./serviceWorker";
-import { Auth0Provider } from "./react-auth0-spa";
-import history from "./utils/history";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './app';
+import { Provider } from 'react-redux';
+import { store } from './state';
+import * as serviceWorker from './serviceWorker';
+import { Auth0Provider } from './react-auth0-spa';
+import history from './utilities/history';
 
 const onRedirectCallback = appState => {
   history.push(
@@ -15,15 +17,18 @@ const onRedirectCallback = appState => {
 };
 
 ReactDOM.render(
-  <Auth0Provider
-    domain={process.env.REACT_APP_AUTH0_DOMAIN}
-    client_id={process.env.REACT_APP_AUTH0_CLIENT_ID}
-    redirect_uri={window.location.origin}
-    onRedirectCallback={onRedirectCallback}
-  >
-    <App />
-  </Auth0Provider>,
-  document.getElementById("root")
+  <Provider store={store}>
+    <Auth0Provider
+      domain={process.env.REACT_APP_AUTH0_DOMAIN}
+      client_id={process.env.REACT_APP_AUTH0_CLIENT_ID}
+      audience={process.env.REACT_APP_AUTH0_AUDIENCE}
+      redirect_uri={window.location.origin}
+      onRedirectCallback={onRedirectCallback}
+    >
+      <App />
+    </Auth0Provider>
+  </Provider>,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

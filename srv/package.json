@@ -18,9 +18,18 @@
   "homepage": "https://github.com/aarongrisez/bellga.me2#readme",
   "dependencies": {
     "boardgame.io": "^0.35.1",
+    "cabin": "^6.0.2",
+    "dotenv": "^8.2.0",
     "esm": "^3.2.25",
+    "express-request-id": "^1.4.1",
+    "jwks-rsa": "^1.6.2",
+    "koa-connect": "^2.0.1",
+    "koa-jwt": "^3.6.0",
     "mocha": "^6.2.2",
     "mongodb": "^3.3.5",
-    "dotenv": "^8.2.0"
+    "pino": "^5.16.0",
+    "request-received": "0.0.3",
+    "response-time": "^2.3.2",
+    "signale": "^1.4.0"
   }
 }

@@ -1,0 +1,84 @@
+/*
+ * Copyright 2018 The boardgame.io Authors.
+ *
+ * Use of this source code is governed by a MIT-style
+ * license that can be found in the LICENSE file or at
+ * https://opensource.org/licenses/MIT.
+ */
+
+import React, { useState, useEffect } from 'react';
+import { useAuth0 } from '../../react-auth0-spa';
+import { connect } from 'react-redux';
+import CreateRoomForm from './CreateRoomForm';
+import { getFormValues } from 'redux-form';
+import {
+  loadRooms,
+  createRoomRequested,
+  deleteRoomRequested
+} from '../../state/actions/lobby';
+import RoomListContainer from './RoomListContainer';
+//import { TicTacToe } from '../Games/TicTacToe';
+//import { TicTacToeBoard } from '../Boards/TicTacToeBoard';
+
+//const importedGames = [{ game: TicTacToe, board: TicTacToeBoard }];
+
+let LobbyView = ({ dispatch }) => {
+  const [fetchingRooms, setFetchingRooms] = useState(true);
+  const [requestingRoom, setRequestingRoom] = useState(false);
+  const [requestingRoomDeletion, setRequestingRoomDeletion] = useState(false);
+  const { getTokenSilently } = useAuth0();
+
+  const requestDelete = (roomName, game) => {
+    return () => {
+      setRequestingRoomDeletion(true);
+      getTokenSilently().then(result => {
+        dispatch(
+          deleteRoomRequested(roomName, game, setRequestingRoomDeletion, result)
+        );
+      });
+    };
+  };
+
+  useEffect(() => {
+    getTokenSilently().then(result => {
+      dispatch(loadRooms('tic-tac-toe', setFetchingRooms, result));
+    });
+  }, []);
+
+  return (
+    <div>
+      <h1>Lobby</h1>
+      <div style={{ padding: 30 }}>
+        <h2>Make a New Room</h2>
+        <CreateRoomForm
+          onSubmit={values => {
+            setRequestingRoom(true);
+            getTokenSilently().then(result => {
+              dispatch(
+                createRoomRequested(
+                  values.roomName,
+                  values.game,
+                  values.numPlayers,
+                  setRequestingRoom,
+                  result
+                )
+              );
+            });
+          }}
+        />
+      </div>
+      <div style={{ padding: 30 }}>
+        <h2>Join an existing room</h2>
+        <RoomListContainer
+          fetching={fetchingRooms}
+          requestDelete={requestDelete}
+        />
+      </div>
+    </div>
+  );
+};
+LobbyView = connect(state => ({
+  formValues: getFormValues('create-room-form')(state)
+}))(LobbyView);
+
+export default LobbyView;
