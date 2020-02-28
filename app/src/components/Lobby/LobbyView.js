@@ -6,11 +6,16 @@
  * https://opensource.org/licenses/MIT.
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuth0 } from '../../react-auth0-spa';
 import { connect } from 'react-redux';
 import CreateRoomForm from './CreateRoomForm';
 import { getFormValues } from 'redux-form';
-import { createRoom, loadRooms } from '../../state/actions/lobby';
+import {
+  loadRooms,
+  createRoomRequested,
+  deleteRoomRequested
+} from '../../state/actions/lobby';
 import RoomListContainer from './RoomListContainer';
 //import { TicTacToe } from '../Games/TicTacToe';
 //import { TicTacToeBoard } from '../Boards/TicTacToeBoard';
@@ -18,24 +23,56 @@ import RoomListContainer from './RoomListContainer';
 //const importedGames = [{ game: TicTacToe, board: TicTacToeBoard }];
 
 let LobbyView = ({ dispatch }) => {
-  dispatch(loadRooms('tic-tac-toe'));
+  const [fetchingRooms, setFetchingRooms] = useState(true);
+  const [requestingRoom, setRequestingRoom] = useState(false);
+  const [requestingRoomDeletion, setRequestingRoomDeletion] = useState(false);
+  const { getTokenSilently } = useAuth0();
+
+  const requestDelete = (roomName, game) => {
+    return () => {
+      setRequestingRoomDeletion(true);
+      getTokenSilently().then(result => {
+        dispatch(
+          deleteRoomRequested(roomName, game, setRequestingRoomDeletion, result)
+        );
+      });
+    };
+  };
+
+  useEffect(() => {
+    getTokenSilently().then(result => {
+      dispatch(loadRooms('tic-tac-toe', setFetchingRooms, result));
+    });
+  }, []);
 
   return (
     <div>
       <h1>Lobby</h1>
-      <div style={{ padding: 10 }}>
+      <div style={{ padding: 30 }}>
         <h2>Make a New Room</h2>
         <CreateRoomForm
-          onSubmit={values =>
-            dispatch(
-              createRoom(values.roomName, values.game, values.numPlayers)
-            )
-          }
+          onSubmit={values => {
+            setRequestingRoom(true);
+            getTokenSilently().then(result => {
+              dispatch(
+                createRoomRequested(
+                  values.roomName,
+                  values.game,
+                  values.numPlayers,
+                  setRequestingRoom,
+                  result
+                )
+              );
+            });
+          }}
         />
       </div>
-      <div style={{ padding: 10 }}>
+      <div style={{ padding: 30 }}>
         <h2>Join an existing room</h2>
-        <RoomListContainer />
+        <RoomListContainer
+          fetching={fetchingRooms}
+          requestDelete={requestDelete}
+        />
       </div>
     </div>
   );

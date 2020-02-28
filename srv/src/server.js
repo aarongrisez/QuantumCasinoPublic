@@ -1,4 +1,4 @@
-const { Server, Mongo } = require('boardgame.io/server');
+const { Server } = require('boardgame.io/server');
 const { TicTacToe } = require('./Games/TicTacToe');
 const jwt = require("koa-jwt");
 const { koaJwtSecret } = require('jwks-rsa');
@@ -26,10 +26,6 @@ const cabin = new Cabin({
 function getServer() {
   return Server({
     games: [TicTacToe],
-    db: new Mongo({
-      url: db_uri,
-      dbname: 'games',
-    })
   })
 }
 
@@ -56,16 +52,6 @@ server.app.use(koaConnect(requestId()));
 // use the cabin middleware (adds request-based logging and helpers)
 server.app.use(cabin.middleware);
 
-// Custom 401 handling if you don't want to expose koa-jwt errors to users
-server.app.use(jwt({ 
-  secret: koaJwtSecret({
-    jwksUri: 'https://dev-k1aifjsj.auth0.com/.well-known/jwks.json',
-    cache: true,
-    cacheMaxEntries: 5,
-    cacheMaxAge: 36000000
-  }),
-  audience: 'https://bellga.me/srv',
-  issuer: 'http://dev-k1aifjsj.auth0.com' 
-}));
+
 
 runServer(server)

@@ -1,0 +1,1 @@
+export const ERROR_API_RESPONSE = 'ERROR_API_RESPONSE';

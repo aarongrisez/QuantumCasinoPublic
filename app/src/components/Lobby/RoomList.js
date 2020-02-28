@@ -4,11 +4,8 @@ import { Table, Spinner } from 'reactstrap';
 import Loading from '../Loading';
 import Room from './Room';
 
-const RoomList = ({ rooms }) => {
-  const [fetching, setFetching] = useState(true);
-
-  if (fetching) {
-    setTimeout(() => setFetching(false), 1500);
+const RoomList = props => {
+  if (props.fetching) {
     return <Spinner color="primary" />;
   }
 
@@ -20,11 +17,13 @@ const RoomList = ({ rooms }) => {
           <th>Game</th>
           <th># Players</th>
           <th>Details</th>
+          <th>Join</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
-        {rooms.map((room, index) => (
-          <Room key={index} {...room} />
+        {props.rooms.map((room, index) => (
+          <Room key={index} requestDelete={props.requestDelete} {...room} />
         ))}
       </tbody>
     </Table>
@@ -32,9 +31,9 @@ const RoomList = ({ rooms }) => {
 };
 
 RoomList.propTypes = {
+  requestDelete: PropTypes.func.isRequired,
   rooms: PropTypes.arrayOf(
     PropTypes.shape({
-      _id: PropTypes.number.isRequired,
       roomName: PropTypes.string.isRequired
     }).isRequired
   ).isRequired

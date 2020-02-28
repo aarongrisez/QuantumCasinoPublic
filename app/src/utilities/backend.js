@@ -1,6 +1,14 @@
-export const fetchBackend = (url, init, token) => {
+async function fetchBackend(context) {
   const headers = new Headers({
-    Authorization: 'Bearer ' + token
+    Authorization: 'Bearer ' + context.token
   });
-  return fetch(url, { ...init, headers: headers });
-};
+  if (context.method) {
+    return await fetch(context.url, {
+      headers: headers,
+      method: context.method
+    });
+  }
+  return await fetch(context.url, { headers: headers });
+}
+
+export default fetchBackend;
