@@ -1,5 +1,4 @@
 import {
-  CREATE_ROOM,
   FETCH_ROOMS_SUCCEEDED,
   CREATE_ROOM_SUCCEEDED
 } from '../actions/lobby';

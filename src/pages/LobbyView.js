@@ -16,6 +16,9 @@ let LobbyView = ({ dispatch }) => {
   const [requestingRoomDeletion, setRequestingRoomDeletion] = useState(false);
   const { getTokenSilently } = useAuth0();
 
+  console.log(requestingRoom)
+  console.log(requestingRoomDeletion)
+
   const requestDelete = (roomName, game) => {
     return () => {
       setRequestingRoomDeletion(true);
@@ -31,7 +34,7 @@ let LobbyView = ({ dispatch }) => {
     getTokenSilently().then(result => {
       dispatch(loadRooms('tic-tac-toe', setFetchingRooms, result));
     });
-  }, []);
+  });
 
   return (
     <div>
