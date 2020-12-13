@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Spinner } from 'reactstrap';
-import Loading from '../Loading';
 import Room from './Room';
 
 const RoomList = props => {

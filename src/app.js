@@ -3,12 +3,13 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import PrivateRoute from './components/PrivateRoute';
-import Loading from './components/Loading';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
-import Home from './components/Home';
-import Profile from './components/Profile';
-import LobbyView from './components/Lobby/LobbyView';
+import Loading from './components/Layout/Loading';
+import NavBar from './components/Layout/NavBar';
+import Footer from './components/Layout/Footer';
+import Home from './pages/HomeView';
+import Profile from './pages/ProfileView';
+import LobbyView from './pages/LobbyView';
+import ErrorView from './pages/ErrorView';
 import { useAuth0 } from './react-auth0-spa';
 import history from './utilities/history';
 
@@ -17,7 +18,6 @@ import './app.css';
 
 // fontawesome
 import initFontAwesome from './utilities/initFontAwesome';
-import ErrorView from './components/ErrorView';
 initFontAwesome();
 
 const App = () => {

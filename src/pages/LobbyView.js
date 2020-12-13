@@ -1,26 +1,14 @@
-/*
- * Copyright 2018 The boardgame.io Authors.
- *
- * Use of this source code is governed by a MIT-style
- * license that can be found in the LICENSE file or at
- * https://opensource.org/licenses/MIT.
- */
-
 import React, { useState, useEffect } from 'react';
-import { useAuth0 } from '../../react-auth0-spa';
+import { useAuth0 } from '../react-auth0-spa';
 import { connect } from 'react-redux';
-import CreateRoomForm from './CreateRoomForm';
+import CreateRoomForm from '../components/Lobby/CreateRoomForm';
 import { getFormValues } from 'redux-form';
 import {
   loadRooms,
   createRoomRequested,
   deleteRoomRequested
-} from '../../state/actions/lobby';
-import RoomListContainer from './RoomListContainer';
-//import { TicTacToe } from '../Games/TicTacToe';
-//import { TicTacToeBoard } from '../Boards/TicTacToeBoard';
-
-//const importedGames = [{ game: TicTacToe, board: TicTacToeBoard }];
+} from '../state/actions/lobby';
+import RoomListContainer from '../components/Lobby/RoomListContainer';
 
 let LobbyView = ({ dispatch }) => {
   const [fetchingRooms, setFetchingRooms] = useState(true);
