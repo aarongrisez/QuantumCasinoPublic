@@ -8,6 +8,8 @@ services:
     volumes:
       - ./src:/usr/src/app/src
       - ./public:/usr/src/app/public
+      - ./package.json:/usr/src/app/package.json
+      - ./yarn.lock:/usr/src/app/yarn.lock
     environment:
       - NODE_ENV=development
       - SKIP_PREFLIGHT_CHECK=true
