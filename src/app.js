@@ -10,6 +10,7 @@ import Home from './pages/HomeView';
 import Profile from './pages/ProfileView';
 import LobbyView from './pages/LobbyView';
 import ErrorView from './pages/ErrorView';
+import AboutView from './pages/AboutView';
 import { useAuth0 } from './react-auth0-spa';
 import history from './utilities/history';
 
@@ -34,6 +35,7 @@ const App = () => {
         <Container className="flex-grow-1 mt-5">
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/about" exact component={AboutView} />
             <PrivateRoute path="/lobby" component={LobbyView} />
             <PrivateRoute path="/profile" component={Profile} />
             <Route path="*" exact component={ErrorView} />

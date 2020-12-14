@@ -32,9 +32,9 @@ let LobbyView = ({ dispatch }) => {
 
   useEffect(() => {
     getTokenSilently().then(result => {
-      dispatch(loadRooms('tic-tac-toe', setFetchingRooms, result));
+      dispatch(loadRooms('', setFetchingRooms, result));
     });
-  });
+  }, [dispatch, getTokenSilently]);
 
   return (
     <div>
@@ -48,8 +48,8 @@ let LobbyView = ({ dispatch }) => {
               dispatch(
                 createRoomRequested(
                   values.roomName,
-                  values.game,
-                  values.numPlayers,
+                  values.game || "bellgame-vanilla",
+                  values.numPlayers || 2,
                   setRequestingRoom,
                   result
                 )

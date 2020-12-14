@@ -16,6 +16,6 @@ services:
       - REACT_APP_AUTH0_DOMAIN=dev-k1aifjsj.auth0.com
       - REACT_APP_AUTH0_CLIENT_ID=7fLB8KTeluEZVjRA9s0BhOBzmDl38ImE
       - REACT_APP_AUTH0_AUDIENCE=https://bellga.me/srv
-      - REACT_APP_GAME_SERVER=http://localhost/srv
+      - REACT_APP_GAME_SERVER=http://localhost:8080/srv
     ports:
       - 3000:3000

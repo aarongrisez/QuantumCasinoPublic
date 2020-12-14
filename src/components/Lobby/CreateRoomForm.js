@@ -28,23 +28,6 @@ const renderInputField = ({
   </div>
 );
 
-const renderNumericField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error, warning }
-}) => (
-  <div>
-    <Label>{label}</Label>
-    <div>
-      <Input {...input} type={type} />
-      {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
-    </div>
-  </div>
-);
-
 const required = value =>
   value || typeof value === 'number' ? undefined : 'Required';
 
@@ -65,31 +48,13 @@ let CreateRoomForm = props => {
                 validate={[required]}
               />
             </Col>
-            <Col xs="3">
-              <Field
-                type="text"
-                label="Game"
-                component={renderInputField}
-                name="game"
-                validate={[required]}
-              />
-            </Col>
-            <Col xs="2">
-              <Field
-                type="number"
-                label="Players"
-                component={renderNumericField}
-                name="numPlayers"
-                validate={[required]}
-              />
-            </Col>
           </Row>
         </FormGroup>
         <Button type="submit" disabled={submitting}>
           Submit
         </Button>
         <Button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
+          Cancel
         </Button>
       </Form>
     </Container>
