@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import PrivateRoute from './components/PrivateRoute';
@@ -29,7 +29,7 @@ const App = () => {
   }
 
   return (
-    <Router history={history}>
+    <BrowserRouter history={history}>
       <div id="app" className="d-flex flex-column h-100">
         <NavBar />
         <Container className="flex-grow-1 mt-5">
@@ -43,7 +43,7 @@ const App = () => {
         </Container>
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 };
 
