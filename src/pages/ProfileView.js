@@ -1,25 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
 import Loading from '../components/Layout/Loading';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Profile = () => {
-  const { loading, user, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
-  const [userToken, setUserToken] = useState("");
-  const [IdTokenClaims, setIdTokenClaims] = useState("");
-
-  useEffect(() => {
-    getAccessTokenSilently({
-      audience: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`,
-      scope: "openid profile email read:current_user update:current_user_metadata"
-    }).then(result => {
-      setUserToken(result);
-    });
-    getIdTokenClaims().then(result => {
-      setIdTokenClaims(result)
-    })
-  }, [getAccessTokenSilently, getIdTokenClaims])
+  const { loading, user } = useAuth0();
 
   if (loading || !user) {
     return <Loading />;
