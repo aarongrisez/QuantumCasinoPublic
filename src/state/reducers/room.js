@@ -1,13 +1,13 @@
 import {
   FETCH_ROOMS_SUCCEEDED,
   CREATE_ROOM_SUCCEEDED
-} from '../actions/lobby';
+} from '../actions/room';
 
 const initialState = {
   rooms: []
 };
 
-export function lobbyReducer(state = initialState, action) {
+export function roomReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_ROOM_SUCCEEDED:
       return createRoomReducer(state, action);
@@ -20,10 +20,11 @@ export function lobbyReducer(state = initialState, action) {
 
 const createRoomReducer = (state, action) => {
   const newGame = {
-    roomID: action.data.gameID,
-    roomName: action.data.gameID,
+    roomID: action.data.name,
+    roomName: action.data.name,
     game: action.data.game,
-    numPlayers: action.data.numPlayers
+    players: action.data.players,
+    maxPlayers: action.data.maxPlayers
   };
   let newRooms = [
     ...state.rooms,
@@ -38,12 +39,13 @@ const createRoomReducer = (state, action) => {
 };
 
 const fetchRoomReducer = (state, action) => {
-  let rooms = action.data.rooms.map(room => {
+  let rooms = action.data.map(room => {
     return {
-      roomID: room.gameID,
-      roomName: room.gameID,
-      game: action.data.game,
-      numPlayers: room.players.length
+      roomID: room.id,
+      roomName: room.name,
+      game: room.game,
+      players: room.players,
+      maxPlayers: room.maxPlayers
     };
   });
 

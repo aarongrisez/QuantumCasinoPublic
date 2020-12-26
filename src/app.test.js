@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { useAuth0 } from './react-auth0-spa'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const user = {
   email: 'test@bellga.me',
@@ -9,7 +9,7 @@ const user = {
   sub: 'google-oauth2|2147627834623744883746'
 }
 
-jest.mock('./react-auth0-spa');
+jest.mock('@auth0/auth0-react');
 
 describe('App', () => {
 

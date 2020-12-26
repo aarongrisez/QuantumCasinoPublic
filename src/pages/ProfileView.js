@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
-import Highlight from '../components/Layout/Highlight';
 import Loading from '../components/Layout/Loading';
-import { useAuth0 } from '../react-auth0-spa';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Profile = () => {
-  const { loading, user } = useAuth0();
+  const { loading, user, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
+  const [userToken, setUserToken] = useState("");
+  const [IdTokenClaims, setIdTokenClaims] = useState("");
+
+  useEffect(() => {
+    getAccessTokenSilently({
+      audience: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`,
+      scope: "openid profile email read:current_user update:current_user_metadata"
+    }).then(result => {
+      setUserToken(result);
+    });
+    getIdTokenClaims().then(result => {
+      setIdTokenClaims(result)
+    })
+  }, [getAccessTokenSilently, getIdTokenClaims])
 
   if (loading || !user) {
     return <Loading />;
@@ -23,12 +36,9 @@ const Profile = () => {
           />
         </Col>
         <Col md>
-          <h2>{user.name}</h2>
+          <h2>{user.nickname}</h2>
           <p className="lead text-muted">{user.email}</p>
         </Col>
-      </Row>
-      <Row>
-        <Highlight>{JSON.stringify(user, null, 2)}</Highlight>
       </Row>
     </Container>
   );

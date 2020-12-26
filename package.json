@@ -9,6 +9,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^1.2.0",
     "@auth0/auth0-spa-js": "^1.6.0",
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.5",

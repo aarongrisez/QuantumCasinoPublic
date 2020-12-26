@@ -15,29 +15,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Toast,
-  ToastHeader,
-  ToastBody
 } from 'reactstrap';
 
-import { useAuth0 } from '../../react-auth0-spa';
-
-const ToastDismissExample = (props) => {
-  const [show, setShow] = useState(true);
-
-  const toggle = () => setShow(!show);
-
-  return (
-    <div>
-      <Toast isOpen={show}>
-        <ToastHeader toggle={toggle}>Hi There!</ToastHeader>
-        <ToastBody>
-          Pardon the mess, we're working on rebuilding some features right now.
-        </ToastBody>
-      </Toast>
-    </div>
-  );
-}
+import { useAuth0 } from '@auth0/auth0-react';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +31,7 @@ const NavBar = () => {
 
   return (
     <div className="nav-container">
-      <Navbar color="light" light expand="md">
+      <Navbar expand="md">
         <Container>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
@@ -76,20 +56,7 @@ const NavBar = () => {
                   About
                 </NavLink>
               </NavItem>
-              <NavItem>
-                {isAuthenticated && (
-                  <NavLink
-                    tag={RouterNavLink}
-                    to="/lobby"
-                    exact
-                    activeClassName="router-link-exact-active"
-                  >
-                    Lobby
-                  </NavLink>
-                )}
-              </NavItem>
             </Nav>
-            <ToastDismissExample />
             <Nav className="d-none d-md-block" navbar>
               {!isAuthenticated && (
                 <NavItem>
@@ -105,7 +72,7 @@ const NavBar = () => {
               )}
               {isAuthenticated && (
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret id="profileDropDown">
+                  <DropdownToggle nav id="profileDropDown">
                     <img
                       src={user.picture}
                       alt="Profile"
@@ -114,7 +81,7 @@ const NavBar = () => {
                     />
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem header>{user.name}</DropdownItem>
+                    <DropdownItem header>{user.nickname}</DropdownItem>
                     <DropdownItem
                       tag={RouterNavLink}
                       to="/profile"

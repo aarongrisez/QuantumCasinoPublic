@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import { lobbyReducer } from './lobby';
+import { roomReducer } from './room';
 import { errorReducer } from './error';
 
 export const rootReducer = combineReducers({
-  lobby: lobbyReducer,
+  room: roomReducer,
   error: errorReducer,
   form: formReducer
 });

@@ -5,7 +5,7 @@ import App from './app';
 import { Provider } from 'react-redux';
 import { store } from './state';
 import * as serviceWorker from './serviceWorker';
-import { Auth0Provider } from './react-auth0-spa';
+import { Auth0Provider } from '@auth0/auth0-react';
 import history from './utilities/history';
 
 const onRedirectCallback = appState => {
@@ -20,8 +20,10 @@ ReactDOM.render(
   <Provider store={store}>
     <Auth0Provider
       domain={process.env.REACT_APP_AUTH0_DOMAIN}
-      client_id={process.env.REACT_APP_AUTH0_CLIENT_ID}
-      redirect_uri={window.location.origin}
+      audience={`https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`}
+      scope="openid profile email read:current_user update:current_user_metadata"
+      clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
+      redirectUri={process.env.REACT_APP_AUTH0_REDIRECT_URI}
       onRedirectCallback={onRedirectCallback}
     >
       <App />

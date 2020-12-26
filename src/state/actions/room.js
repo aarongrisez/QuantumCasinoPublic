@@ -16,19 +16,18 @@ export function createRoomRequested(
 ) {
   return {
     type: CREATE_ROOM_REQUESTED,
-    url: '/games/' + game + '/create',
+    url: '/rooms/' + game + '/create',
     setFetching: setFetching,
     token: token,
     roomName: roomName,
     numPlayers: numPlayers,
-    game: game
   };
 }
 
 export function deleteRoomRequested(roomName, game, setFetching, token) {
   return {
     type: DELETE_ROOM_REQUESTED,
-    url: '/games/' + game + '/' + roomName,
+    url: '/rooms/' + game + '/' + roomName,
     setFetching: setFetching,
     token: token,
     game: game
@@ -38,7 +37,7 @@ export function deleteRoomRequested(roomName, game, setFetching, token) {
 export function loadRooms(game, setFetching, token) {
   return {
     type: LOAD_ROOMS,
-    url: '/games/' + game,
+    url: '/rooms/' + game,
     setFetching: setFetching,
     token: token,
     game: game

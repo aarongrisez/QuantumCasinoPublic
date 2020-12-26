@@ -3,7 +3,7 @@ import RoomList from './RoomList';
 
 const mapStateToProps = state => {
   return {
-    rooms: state.lobby.rooms
+    rooms: state.room.rooms
   };
 };
 

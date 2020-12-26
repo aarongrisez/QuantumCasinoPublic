@@ -6,18 +6,20 @@ import {
   CREATE_ROOM_SUCCEEDED,
   DELETE_ROOM_REQUESTED,
   DELETE_ROOM_SUCCEEDED
-} from '../actions/lobby';
+} from '../actions/room';
 import { ERROR_API_RESPONSE } from '../actions/error';
 import fetchBackend from '../../utilities/backend';
 
 export function* fetchRooms(action) {
   try {
+    console.log(action.token)
     const response = yield call(fetchBackend, {
       url: process.env.REACT_APP_GAME_SERVER + action.url,
       token: action.token
     });
     if (response.ok) {
       const data = yield response.json();
+
       data.game = action.game;
       yield put({ type: FETCH_ROOMS_SUCCEEDED, data: data });
     } else {
@@ -42,11 +44,11 @@ export function* createRoom(action) {
     const response = yield call(fetchBackend, {
       url: process.env.REACT_APP_GAME_SERVER + action.url,
       token: action.token,
-      method: 'POST'
+      method: 'POST',
+      data: action.data || {}
     });
     if (response.ok) {
       let data = yield response.json();
-      data = { ...data, game: action.game, numPlayers: action.numPlayers };
       yield put({ type: CREATE_ROOM_SUCCEEDED, data: data });
     } else {
       yield put({

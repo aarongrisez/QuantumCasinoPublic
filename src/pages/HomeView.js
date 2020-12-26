@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import Hero from '../components/Layout/Hero';
 
-const Home = () => (
+const HomeView = () => (
   <Fragment>
     <Hero />
     <h1 className="mb-4">Welcome to the Bellgame!</h1>
@@ -11,4 +11,4 @@ const Home = () => (
   </Fragment>
 );
 
-export default Home;
+export default HomeView;
